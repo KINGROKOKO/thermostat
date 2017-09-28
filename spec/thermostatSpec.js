@@ -58,7 +58,7 @@ describe('Decrease temperature', function(){
         thermostat.up()
         i++;
         }
-        console.log(thermostat.temperature);
+        
         expect(thermostat.up()).toEqual('MAX TEMPERATURE REACHED')
 
         });
