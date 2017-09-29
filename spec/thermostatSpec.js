@@ -65,6 +65,25 @@ describe('Decrease temperature', function(){
         });
       });
 
+      describe('If power save is off', function(){
+
+          it('max temperature is above 25 degrees', function(){
+
+          thermostat.powerSavingOff();
+
+          var i = 0
+
+          while(i<6){
+          thermostat.up();
+          i++;
+          }
+
+          expect(thermostat.getCurrentTemperature()).toEqual(26)
+
+          });
+        });
+
+
       describe('If power save is on', function(){
 
           it('as default', function(){
@@ -95,7 +114,7 @@ describe('Decrease temperature', function(){
           thermostat.up();
           i++;
           }
-    
+
           expect(thermostat.getCurrentEnergyUsage()).toEqual('HIGH USAGE')
 
           });
