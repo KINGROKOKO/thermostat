@@ -43,6 +43,7 @@ describe('Decrease temperature', function(){
       thermostat.down()
       i++;
       }
+
       expect(thermostat.down()).toEqual('MIN TEMPERATURE REACHED')
 
       });
@@ -55,10 +56,10 @@ describe('Decrease temperature', function(){
         var i = 0
 
         while(i<5){
-        thermostat.up()
+        thermostat.up();
         i++;
         }
-        
+
         expect(thermostat.up()).toEqual('MAX TEMPERATURE REACHED')
 
         });
@@ -71,5 +72,68 @@ describe('Decrease temperature', function(){
 
           });
         });
+
+      describe('Reset function', function(){
+
+          it('sets temperature back to 20', function(){
+
+          thermostat.down();
+          thermostat.reset();
+          expect(thermostat.getCurrentTemperature()).toEqual(20)
+
+          });
+        });
+
+      describe('Check energy usage', function(){
+
+          it('HIGH if over 25 degrees', function(){
+          thermostat.powerSavingOff();
+
+          var i = 0
+
+          while(i<6){
+          thermostat.up();
+          i++;
+          }
+    
+          expect(thermostat.getCurrentEnergyUsage()).toEqual('HIGH USAGE')
+
+          });
+        });
+
+        describe('Check energy usage', function(){
+
+            it('MEDIUM if over 18 degrees and under 25 degrees', function(){
+            thermostat.powerSavingOff();
+
+            var i = 0
+
+            while(i<4){
+            thermostat.up();
+            i++;
+            }
+
+            expect(thermostat.getCurrentEnergyUsage()).toEqual('MEDIUM USAGE')
+
+            });
+          });
+
+          describe('Check energy usage', function(){
+
+              it('LOW if under 18 degrees', function(){
+              thermostat.powerSavingOff();
+
+              var i = 0
+
+              while(i<4){
+              thermostat.down();
+              i++;
+              }
+
+              expect(thermostat.getCurrentEnergyUsage()).toEqual('LOW USAGE')
+
+              });
+            });
+
 
 });
